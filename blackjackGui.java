@@ -69,7 +69,6 @@ public class blackjackGui extends Frame implements ActionListener{
         
         add(newGame);
         newGame.setEnabled(false);
-        //WORKING ON RESETTING / NEW GAME
         setSize(400, 400);
         setLayout(null);
         setVisible(true);
@@ -108,6 +107,7 @@ public class blackjackGui extends Frame implements ActionListener{
                 }else{
                     flavorText.setText("Both of you go bust.");
                 }
+                newGame.setEnabled(true);
             }
         }
         if (e.getSource() == playerStay){
@@ -115,6 +115,7 @@ public class blackjackGui extends Frame implements ActionListener{
             playerStay.setEnabled(false);
             totalDealerHand = ("Dealer's hand: " + dealerHidden + ", " + dealerShown);
             dealerHandLabel.setText(totalDealerHand);
+            newGame.setEnabled(true);
             while (dealerHand < 17){
                 int dNewDraw = draw.getRandNum();
                 dealerHand += dNewDraw;
@@ -133,6 +134,29 @@ public class blackjackGui extends Frame implements ActionListener{
             }else{
                 flavorText.setText("Both of you go bust.");
             }
+        }
+        if (e.getSource() == newGame){
+            playerStay.setEnabled(true);
+            playerHit.setEnabled(true);
+            newGame.setEnabled(false);
+            pDraw1 = draw.getRandNum();
+            pDraw2 = draw.getRandNum();
+            playerHand = pDraw1 + pDraw2;;
+            dealerHidden = draw.getRandNum();;
+            dealerShown = draw.getRandNum();
+            dealerHand = dealerHidden + dealerShown;;
+            bust = false;
+            dealerBust = false;
+            totalPlayerHand = ("Your hand: " + pDraw1 + ", " + pDraw2);
+            totalDealerHand = ("Dealer's hand: [Hidden], " + dealerShown);
+            dealerBust = false;
+            dealerBustLabel.setText("");
+            bust = false;
+            playerBustLabel.setText("");
+            playerHandLabel.setText(totalPlayerHand);
+            dealerHandLabel.setText(totalDealerHand);
+            flavorText.setText("");
+            
         }
     }
     public static void main(String[] args) {
